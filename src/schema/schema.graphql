@@ -1,0 +1,27 @@
+type Query {
+  hello: String!
+  user(username: String): User
+  users: [User]
+  post(_id: String): Post
+  postsByAuthor(author: String): [Post]
+  posts: [Post]
+}
+
+type Mutation {
+  addUser(username: String!, email: String!, password: String!): User!
+  addPost(author: String!, title: String!, body: String!): Post!
+}
+
+type User {
+  _id: String!
+  username: String
+  email: String
+  password: String
+}
+
+type Post {
+  _id: String!
+  author: String
+  title: String
+  body: String
+}

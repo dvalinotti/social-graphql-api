@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "dist",
+    "sourceMap": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "pretty": true,
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    ".vscode",
+    "data",
+  ]
+}
