@@ -4,6 +4,7 @@ const PostSchema = new mongoose.Schema({
   author: String,
   title: String,
   body: String,
+  createdAt: String,
 }, {
   toObject: { virtuals: true }
 });

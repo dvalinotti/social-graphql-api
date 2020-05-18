@@ -43,6 +43,7 @@
     "graphql-depth-limit": "^1.1.0",
     "graphql-import": "^1.0.2",
     "graphql-import-node": "^0.0.4",
+    "graphql-iso-date": "^3.6.1",
     "graphql-tools": "^5.0.0",
     "http": "^0.0.1-security",
     "mongoose": "^5.9.14",

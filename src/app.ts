@@ -49,7 +49,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // Create & run HTTP Server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const httpServer = createServer(app);
 httpServer.listen(
   { port: PORT },

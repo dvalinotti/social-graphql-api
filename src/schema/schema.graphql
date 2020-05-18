@@ -10,18 +10,27 @@ type Query {
 type Mutation {
   addUser(username: String!, email: String!, password: String!): User!
   addPost(author: String!, title: String!, body: String!): Post!
+  login(username: String!, password: String!): AuthPayload
+  register(username: String!, email: String!, password: String!): AuthPayload
 }
 
 type User {
   _id: String!
-  username: String
-  email: String
-  password: String
+  username: String!
+  displayName: String
+  email: String!
+  password: String!
 }
 
 type Post {
   _id: String!
-  author: String
-  title: String
+  author: User!
+  title: String!
   body: String
+  createdAt: String!
+}
+
+type AuthPayload {
+  token: String
+  user: User
 }

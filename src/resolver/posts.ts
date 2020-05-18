@@ -1,4 +1,5 @@
 import Post from '../models/post';
+import User from '../models/user';
 
 type PostRequest = {
   _id: String;
@@ -6,7 +7,7 @@ type PostRequest = {
 type PostsByAuthorRequest = {
   author: String;
 }
-type AddUserArgs = {
+type AddPostArgs = {
   author: String;
   title: String;
   body: String;
@@ -25,12 +26,16 @@ export default {
     },
   },
   Mutation: {
-    addPost: (_: void, { author, title, body }: AddUserArgs): any => {
+    addPost: (_: void, { author, title, body }: AddPostArgs): any => {
       return new Post({
         author,
         title,
-        body
+        body,
+        createdAt: new Date().toISOString()
       }).save();
     }
+  },
+  Post: {
+    author: post => User.findOne({ username: post.author }),
   }
 };
