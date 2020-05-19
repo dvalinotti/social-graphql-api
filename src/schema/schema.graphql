@@ -1,3 +1,5 @@
+scalar Void
+
 type Query {
   hello: String!
   user(username: String): User
@@ -5,13 +7,19 @@ type Query {
   post(_id: String): Post
   postsByAuthor(author: String): [Post]
   posts: [Post]
+  session(token: String!): Session
+  sessions: [Session]
+  sessionByUserId(userId: String): Session
 }
 
 type Mutation {
   addUser(username: String!, email: String!, password: String!): User!
   addPost(author: String!, title: String!, body: String!): Post!
-  login(username: String!, password: String!): AuthPayload
-  register(username: String!, email: String!, password: String!): AuthPayload
+  login(username: String!, password: String!): Session
+  createSession(userId: String!): Session
+  destroySession(token: String!): Void
+  # login(username: String!, password: String!): AuthPayload
+  # register(username: String!, email: String!, password: String!): AuthPayload
 }
 
 type User {
@@ -19,7 +27,7 @@ type User {
   username: String!
   displayName: String
   email: String!
-  password: String!
+  password: String
 }
 
 type Post {
@@ -27,6 +35,13 @@ type Post {
   author: User!
   title: String!
   body: String
+  createdAt: String!
+}
+
+type Session {
+  _id: String!
+  token: String!
+  userId: String!
   createdAt: String!
 }
 

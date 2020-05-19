@@ -1,5 +1,6 @@
 import express from 'express';
 import * as path from 'path';
+import 'dotenv/config';
 import { ApolloServer, gql } from 'apollo-server-express';
 import schema from './schema';
 import cors from 'cors';
@@ -20,6 +21,9 @@ var app = express();
 const apolloServer = new ApolloServer({
   schema,
   validationRules: [depthLimit(7)],
+  context: () => ({
+    secret: process.env.JWT_SECRET,
+  }),
 });
 apolloServer.applyMiddleware({ app, path: '/graphql'});
 
