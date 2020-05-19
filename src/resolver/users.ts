@@ -49,15 +49,15 @@ export default {
       }
 
       const hashedPass = await bcrypt.hash(password, 10);
-      const passwordValid = await bcrypt.compare(user.get('password'), password);
+      const passwordValid = await bcrypt.compare(user.get('password'), hashedPass);
       if (!passwordValid) {
         throw new AuthenticationError('Username/password combination does not match.');
       }
 
       return await SessionResolver.default.Mutation.createSession(
         null, 
-        { userId: user.get('userId')}, 
-        process.env.JWT_SECRET
+        { userId: user.get('_id') }, 
+        { secret: process.env.JWT_SECRET }
       );
     }
   }

@@ -8,6 +8,8 @@ import depthLimit from "graphql-depth-limit";
 import compression from 'compression';
 import { createServer } from 'http';
 import mongoose from 'mongoose';
+import { getClient } from './auth';
+import models from './models';
 
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -21,9 +23,14 @@ var app = express();
 const apolloServer = new ApolloServer({
   schema,
   validationRules: [depthLimit(7)],
-  context: () => ({
-    secret: process.env.JWT_SECRET,
-  }),
+  context: async ({ req }): Promise<any> => {
+    const client = await getClient(req);
+    return {
+      models,
+      client,
+      secret: process.env.JWT_SECRET,
+    };
+  },
 });
 apolloServer.applyMiddleware({ app, path: '/graphql'});
 
@@ -53,7 +60,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // Create & run HTTP Server
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 4001;
 const httpServer = createServer(app);
 httpServer.listen(
   { port: PORT },

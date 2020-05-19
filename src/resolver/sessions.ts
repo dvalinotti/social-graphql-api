@@ -42,7 +42,7 @@ export default {
       const existingSession = await Session.findOne({ userId });
       // Check if session exists for userId
       if (existingSession) {
-        throw new AuthenticationError('Session for this userId already exists.');
+        return existingSession;
       }
       // If no session exists, create new
       return new Session({
@@ -51,8 +51,18 @@ export default {
         createdAt,
       }).save();
     },
-    destroySession: (_: void, { token }: SessionRequest): any => {
-      return Session.deleteOne({ token });
+    destroySession: async (_: void, { token }: SessionRequest): Promise<any> => {
+      const existingSession = await Session.findOne({ token });
+      if (!existingSession) {
+        return { type: 'error', message: 'No session with this token exists.' };
+      }
+      const deleted = (await Session.deleteOne({ token })).ok;
+      console.log(deleted);
+
+      if (deleted !== 1) {
+        return { type: 'error', message: 'An unknown error occurred.' };
+      }
+      return { type: 'success', message: 'Successfully logged out.' };
     }
   }
 }

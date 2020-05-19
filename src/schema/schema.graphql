@@ -17,7 +17,7 @@ type Mutation {
   addPost(author: String!, title: String!, body: String!): Post!
   login(username: String!, password: String!): Session
   createSession(userId: String!): Session
-  destroySession(token: String!): Void
+  destroySession(token: String!): InfoResponse
   # login(username: String!, password: String!): AuthPayload
   # register(username: String!, email: String!, password: String!): AuthPayload
 }
@@ -48,4 +48,9 @@ type Session {
 type AuthPayload {
   token: String
   user: User
+}
+
+type InfoResponse {
+  type: String!
+  message: String
 }

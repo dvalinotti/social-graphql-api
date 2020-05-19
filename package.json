@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"yarn mongo\" \"yarn run start:watch\" --inspect-brk=9229",
+    "dev": "concurrently \"yarn mongo\" \"yarn run start:watch\"",
     "mongo": "mongod --dbpath=./src/data/db --quiet",
     "start": "node --inspect=5858 -r ts-node/register ./app.ts",
     "start:watch": "nodemon 'src/app.ts' --exec 'ts-node' ./src/app.ts -e ts,graphql",
@@ -49,6 +49,7 @@
     "graphql-tools": "^5.0.0",
     "http": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
+    "kill-port": "^1.6.0",
     "mongoose": "^5.9.14",
     "morgan": "~1.9.1",
     "ncp": "^2.0.0",
