@@ -29,7 +29,7 @@
     "@types/graphql-depth-limit": "^1.1.2",
     "@types/mongoose": "^5.7.20",
     "@types/node": "^14.0.1",
-    "apollo-server": "^2.13.1",
+    "apollo-server": "^2.25.4",
     "apollo-server-express": "^2.13.1",
     "bcrypt": "^4.0.1",
     "compression": "^1.7.4",
